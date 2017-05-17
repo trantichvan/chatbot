@@ -1,0 +1,25 @@
+{
+  "name": "botwork",
+  "version": "1.0.0",
+  "description": "\"\"",
+  "main": "app.js",
+  "scripts": {
+    "test": "(leave blank)"
+  },
+  "repository": {
+    "type": "git",
+    "url": "(default)"
+  },
+  "keywords": [
+    "bot",
+    "facebook"
+  ],
+  "author": "botchat1",
+  "license": "ISC",
+  "dependencies": {
+    "botbuilder": "^3.7.0",
+    "google": "^2.1.0",
+    "restify": "^4.3.0",
+    "write": "^0.3.3"
+  }
+}
