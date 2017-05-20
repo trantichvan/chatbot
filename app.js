@@ -13,8 +13,8 @@ server.listen(process.env.port || process.env.PORT || 3978, function () {
   
 // Create chat bot
 var connector = new builder.ChatConnector({
-    appId: process.env.MICROqT_APP_ID,
-    appPassword: process.env.MICROSOFT_APP_PASSWORD
+    appId:'',// process.env.MICROqT_APP_ID,
+    appPassword:'' //process.env.MICROSOFT_APP_PASSWORD
 });
 var bot = new builder.UniversalBot(connector);
 server.post('/api/messages', connector.listen());
@@ -133,7 +133,7 @@ bot.dialog('/luachon1',[
 
 bot.dialog('/key', [
     function (session) {
-        //session.userData.luachon = 0;
+        session.userData.luachon = 0;
         builder.Prompts.text(session, 'Bạn muốn tìm từ khóa nào?');
     },
     function (session, results,next) {
@@ -173,6 +173,7 @@ bot.dialog('/crawler',[
         google.resultsPerPage = 25
         var nextCounter = 0
                 // hàm google thỉnh thoảng bị lỗi IP
+                // cai dat npm
         google(session.userData.key, function (err, res){
             if (err) console.error(err)
  
@@ -238,18 +239,24 @@ bot.dialog('/resetdata', [
           if(err) {
                return console.log(err);
                    }
-       console.log("The file was reset");
+        console.log("The file was reset");
 });
-        session.userData.luachon =0;
-        session.beginDialog('/luachon');
+        session.beginDialog('/chuyen');
     }
 ]);
 
+//
+
+bot.dialog('/chuyen',[
+    function(session){
+        session.beginDialog('/luachon');
+    }
+    ]);
             //Chuc nang 2
 
 bot.dialog('/inputkeys',[
     function(session){
-        //session.userData.luachon = 0;
+        session.userData.luachon = 0;
         builder.Prompts.text(session, 'Nhập các từ khóa, mỗi từ khóa được cách nhau bởi dấu phẩy'); // hàm này để chạy hàm function bên dưới khác với session.send
     },
     function (session, results) {
@@ -372,7 +379,6 @@ bot.dialog('/resetdatatxt1',[
                    }
        console.log("The file was reset");
        session.userData.chiso = 0;
-       session.userData.luachon =0;
        session.beginDialog('/luachon');
 });
 
